@@ -24,6 +24,14 @@ CREATE TABLE Employees(
     Emp_Password    VARCHAR2(100) NOT NULL
     );
 
+ALTER TABLE Employees ADD User_Schema VARCHAR2(30);
+
+UPDATE Employees 
+SET User_Schema = 'C##NADINE' 
+WHERE Emp_Name = 'Nadine Maksoud';
+
+
+
 CREATE TABLE Customers(
     Customer_Id     VARCHAR2(15) CONSTRAINT pk_customers PRIMARY KEY,
     Customer_Name   VARCHAR2(50) NOT NULL,

@@ -1,0 +1,9 @@
+CREATE PROFILE limit_login_attempts
+LIMIT FAILED_LOGIN_ATTEMPTS 3;
+
+ALTER USER C##NADINE PROFILE limit_login_attempts;
+ALTER USER C##CHRIS PROFILE limit_login_attempts;
+ALTER USER C##AYA PROFILE limit_login_attempts;
+ALTER USER C##RINA PROFILE limit_login_attempts;
+ALTER USER C##LEO PROFILE limit_login_attempts;
+ALTER USER C##SAKURA PROFILE limit_login_attempts;

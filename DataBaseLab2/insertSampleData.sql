@@ -19,6 +19,8 @@ VALUES ('C006', 'Soda');
 INSERT INTO Categories (Category_Id, Category_Name)
 VALUES ('C007', 'Fried Rice & Stir-Fried Noodle');
 
+
+
 INSERT INTO Products (Product_Id, Product_Name, Price, Stock, Category_Id)
 VALUES ('P001', 'Spring Roll (2pcs)', 3.00, 10, 'C001');
 
@@ -50,7 +52,7 @@ INSERT INTO Products (Product_Id, Product_Name, Price, Stock, Category_Id)
 VALUES ('P010', 'Chicken Nuggets (8pcs) W. Fries', 7.99, 16, 'C001');
 
 INSERT INTO Products (Product_Id, Product_Name, Price, Stock, Category_Id)
-VALUES ('P011', 'Takoyaki', 8.00, , 'C001');
+VALUES ('P011', 'Takoyaki', 8.00,7 , 'C001');
 
 INSERT INTO Products (Product_Id, Product_Name, Price, Stock, Category_Id)
 VALUES ('P012', 'ShuMai (Shrimp & Pork)', 8.00, 6, 'C001');
@@ -80,7 +82,7 @@ INSERT INTO Products (Product_Id, Product_Name, Price, Stock, Category_Id)
 VALUES ('P020', 'Kimchi Ramen', 11.99, 10, 'C002');
 
 INSERT INTO Products (Product_Id, Product_Name, Price, Stock, Category_Id)
-VALUES ('P021', 'Vegetable Ramen', 11.99, , 'C002');
+VALUES ('P021', 'Vegetable Ramen', 11.99,12 , 'C002');
 
 INSERT INTO Products (Product_Id, Product_Name, Price, Stock, Category_Id)
 VALUES ('P022', 'Dumpling Ramen', 11.99, 16, 'C002');
@@ -204,3 +206,99 @@ VALUES ('P061', 'Chicken Stir-Fried Noodle', 11.99, 20, 'C007');
 
 INSERT INTO Products (Product_Id, Product_Name, Price, Stock, Category_Id)
 VALUES ('P062', 'Shrimp Stir-Fried Noodle', 12.99, 15, 'C007');
+
+
+
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password) 
+VALUES ('E001', 'Nadine Maksoud', 'Manager', 'nadine.m', 'nadine123');
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password)
+VALUES ('E002', 'Chris Dahmen', 'Assistant Manager', 'chris.d', 'chris123');
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password)
+VALUES ('E003', 'Aya Tanaka', 'Cashier', 'aya.t', 'Cashier01');
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password)
+VALUES ('E004', 'Leo Kimura', 'Waiter', 'leo.k', 'Waiter01');
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password)
+VALUES ('E005', 'Mika Sato', 'Barista', 'mika.s', 'Barista01');
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password)
+VALUES ('E006', 'Taro Suzuki', 'Delivery', 'taro.s', 'Delivery01');
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password)
+VALUES ('E007', 'Hiroshi Yamamoto', 'Chef', 'hiroshi.y', 'Chef01');
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password)
+VALUES ('E008', 'Yuki Nakamura', 'Ramen Cook', 'yuki.n', 'Ramen01');
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password)
+VALUES ('E009', 'Kenji Ito', 'Kitchen Assistant', 'kenji.i', 'Kitchen01');
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password)
+VALUES ('E010', 'Sakura Fujimoto', 'Inventory', 'sakura.f', 'Inventory01');
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password)
+VALUES ('E011', 'Rina Kobayashi', 'HR', 'rina.k', 'HR01');
+
+INSERT INTO Employees (Emp_Id, Emp_Name, Emp_Role, Login_Id, Emp_Password)
+VALUES ('E012', 'Daichi Mori', 'Cleaner', 'daichi.m', 'Clean01');
+
+
+
+
+INSERT INTO Customers (Customer_Id, Customer_Name, Phone_Number, Loyalty_Points, Email)
+VALUES ('CU001', 'Rita Matar', '70111222', 20, 'rita.m@gmail.com');
+
+INSERT INTO Customers (Customer_Id, Customer_Name, Phone_Number, Loyalty_Points, Email)
+VALUES ('CU002', 'Hassan Abbas', '71333444', 15, 'hassan.a@gmail.com');
+
+INSERT INTO Customers(Customer_Id, Customer_Name, Phone_Number, Loyalty_Points, Email)
+VALUES ('CU003', 'Layla Samir', '76999888', 30, 'layla.s@gmail.com');
+
+
+
+
+INSERT INTO Sales (Sale_Id, Sale_Date, Total_Amount, Payment_Method, Emp_Id, Customer_Id)
+VALUES ('S001', TO_DATE('2024-10-01', 'YYYY-MM-DD'), 25.50, 'Credit Card', 'E003', 'CU001');
+
+INSERT INTO Sales (Sale_Id, Sale_Date, Total_Amount, Payment_Method, Emp_Id, Customer_Id)
+VALUES ('S002', TO_DATE('2024-10-02', 'YYYY-MM-DD'), 15.75, 'Cash', 'E004', 'CU002');
+
+INSERT INTO Sales (Sale_Id, Sale_Date, Total_Amount, Payment_Method, Emp_Id, Customer_Id)
+VALUES ('S003', TO_DATE('2024-10-03', 'YYYY-MM-DD'), 30.00, 'Debit Card', 'E005', 'CU003');
+
+
+
+
+INSERT INTO Payments (Payment_Id, Payment_Type, Amount, Payment_Date, Sale_Id)
+VALUES ('PMT001', 'Credit Card', 25.50, TO_DATE('2024-10-01', 'YYYY-MM-DD'), 'S001');
+
+INSERT INTO Payments (Payment_Id, Payment_Type, Amount, Payment_Date, Sale_Id)
+VALUES ('PMT002', 'Cash', 15.75, TO_DATE('2024-10-02', 'YYYY-MM-DD'), 'S002');
+
+INSERT INTO Payments (Payment_Id, Payment_Type, Amount, Payment_Date, Sale_Id)
+VALUES ('PMT003', 'Debit Card', 30.00, TO_DATE('2024-10-03', 'YYYY-MM-DD'), 'S003');
+
+
+
+
+INSERT INTO SaleItems (SaleItem_Id, Quantity, Price, Sale_Id, Product_Id)
+VALUES ('SI001', 2, 7.00, 'S001', 'P007');
+
+INSERT INTO SaleItems (SaleItem_Id, Quantity, Price, Sale_Id, Product_Id)
+VALUES ('SI002', 1, 11.99, 'S001', 'P015');
+
+INSERT INTO SaleItems (SaleItem_Id, Quantity, Price, Sale_Id, Product_Id)
+VALUES ('SI003', 1, 3.25, 'S002', 'P002');
+
+INSERT INTO SaleItems (SaleItem_Id, Quantity, Price, Sale_Id, Product_Id)
+VALUES ('SI004', 1, 4.50, 'S002', 'P004');
+
+INSERT INTO SaleItems (SaleItem_Id, Quantity, Price, Sale_Id, Product_Id)
+VALUES ('SI005', 2, 11.99, 'S003', 'P016');
+
+INSERT INTO SaleItems (SaleItem_Id, Quantity, Price, Sale_Id, Product_Id)
+VALUES ('SI006', 1, 6.00, 'S003', 'P008');
