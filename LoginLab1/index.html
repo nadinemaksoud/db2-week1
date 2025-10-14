@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Café POS System - Login</title>
     <link rel="stylesheet" href="style.css">
-    <script defer src="script.js"></script>
 </head>
 <body>
     <div class="login-container">
@@ -20,8 +19,42 @@
                 <input type="password" id="password" name="password" required>
             </div>
             <button type="submit">Login</button>
-            <div id="errorMessage" role="alert"></div>
+            <div id="errorMessage" role="alert" style="color:red; margin-top:10px;"></div>
         </form>
     </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const errorMessage = document.getElementById('errorMessage');
+
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            try {
+                const response = await fetch('http://localhost:3001/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ username, password })
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    errorMessage.style.color = 'green';
+                    errorMessage.textContent = data.message;
+                } else {
+                    errorMessage.style.color = 'red';
+                    errorMessage.textContent = data.message;
+                }
+            } catch (err) {
+                errorMessage.style.color = 'red';
+                errorMessage.textContent = 'Error connecting to server: ' + err.message;
+            }
+        });
+    </script>
 </body>
 </html>

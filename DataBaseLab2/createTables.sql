@@ -6,6 +6,7 @@ CREATE TABLE Categories(
     Category_Name   VARCHAR2(50) NOT NULL
     );
 
+
 CREATE TABLE Products(
     Product_Id      VARCHAR2(15) CONSTRAINT pk_products PRIMARY KEY,
     Product_Name    VARCHAR2(100) NOT NULL,
@@ -23,13 +24,6 @@ CREATE TABLE Employees(
     Login_Id        VARCHAR2(30) UNIQUE,
     Emp_Password    VARCHAR2(100) NOT NULL
     );
-
-ALTER TABLE Employees ADD User_Schema VARCHAR2(30);
-
-UPDATE Employees 
-SET User_Schema = 'C##NADINE' 
-WHERE Emp_Name = 'Nadine Maksoud';
-
 
 
 CREATE TABLE Customers(

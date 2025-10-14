@@ -1,130 +1,62 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
-const oracledb = require('oracledb');
+const oracledb = require('oracledb');  // Oracle client
 
 const app = express();
 const PORT = 3001;
 
-// CORS - allow all for development
+
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
-// Try different connection configurations
-const dbConfigs = [
-    {
-        name: 'PDB',
-        config: {
-            user: 'system',
-            password: 'Oracle123',
-            connectString: 'localhost:1521/XEPDB1'
-        }
-    },
-    {
-        name: 'CDB', 
-        config: {
-            user: 'system',
-            password: 'Oracle123',
-            connectString: 'localhost:1521/XE'
-        }
-    }
-];
+// Oracle configuration (change according to your container/db setup)
+const dbConfig = {
+  connectString: "localhost:1521/XEPDB1", // your container's service name or DB service
+};
 
-let currentDbConfig = dbConfigs[0]; // Start with PDB
-
-// Test database connection on startup
-async function testDatabaseConnection() {
-    for (let db of dbConfigs) {
-        try {
-            const connection = await oracledb.getConnection(db.config);
-            console.log(`✅ Connected to ${db.name}`);
-            
-            // Test if Employees table exists
-            const result = await connection.execute(
-                `SELECT COUNT(*) as count FROM Employees WHERE Login_Id = 'nadine.m'`
-            );
-            console.log(`📊 Found ${result.rows[0][0]} matching users in ${db.name}`);
-            
-            await connection.close();
-            currentDbConfig = db;
-            return true;
-        } catch (err) {
-            console.log(`❌ Cannot connect to ${db.name}:`, err.message);
-        }
-    }
-    return false;
-}
-
-// Test route
-app.get('/test', (req, res) => {
-    res.json({ 
-        message: 'Server is running!',
-        database: currentDbConfig.name,
-        timestamp: new Date().toISOString()
-    });
-});
-
-// Login endpoint
 app.post('/login', async (req, res) => {
-    const { username, password } = req.body;
-    console.log('🔐 Login attempt:', username);
+  const { username, password } = req.body;
+  console.log('Received credentials:', { username, password });
 
-    let connection;
+  let connection;
 
-    try {
-        connection = await oracledb.getConnection(currentDbConfig.config);
-        console.log('✅ Database connected to:', currentDbConfig.name);
+  try {
+    // Try connecting as the given user
+    connection = await oracledb.getConnection({
+      user: username,
+      password: password,
+      connectString: dbConfig.connectString,
+    });
 
-        const result = await connection.execute(
-            `SELECT Emp_Name, Emp_Role 
-             FROM Employees 
-             WHERE Login_Id = :username AND Emp_Password = :password`,
-            { username, password },
-            { outFormat: oracledb.OUT_FORMAT_OBJECT }
-        );
+    // If connected successfully
+    res.json({ success: true, message: 'Login successful!' });
+  } catch (err) {
+  let msg = 'Login failed';
+  
+  const errorMessage = (err.message || '').toUpperCase();
 
-        console.log('📊 Query returned', result.rows.length, 'rows');
-
-        if (result.rows.length > 0) {
-            console.log('✅ Login successful for:', result.rows[0].EMP_NAME);
-            res.json({ 
-                success: true, 
-                message: 'Login successful!', 
-                user: result.rows[0]
-            });
-        } else {
-            console.log('❌ Invalid credentials for:', username);
-            res.status(401).json({ 
-                success: false, 
-                message: 'Invalid username or password' 
-            });
-        }
-
-    } catch (err) {
-        console.error('💥 Database error:', err);
-        res.status(500).json({ 
-            success: false, 
-            message: 'Database error: ' + err.message 
-        });
-    } finally {
-        if (connection) {
-            try { 
-                await connection.close(); 
-            } catch (err) { 
-                console.error(err); 
-            }
-        }
+    if (errorMessage.includes('ORA-01017')) {
+      msg = 'Wrong username or password';
+    } else if (errorMessage.includes('ORA-28000')) {
+      msg = 'Your account is locked. Please contact the administrator.';
+    } else if (errorMessage.includes('ORA-01045')) {
+      msg = 'You lack CREATE SESSION privilege';
     }
+  res.status(401).json({ success: false, message: msg });
+  } 
+  
+  finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (closeErr) {
+        console.error('Error closing connection:', closeErr);
+      }
+    }
+  }
 });
 
-// Start server
-app.listen(PORT, async () => {
-    console.log(`🚀 Server running at http://localhost:${PORT}`);
-    console.log('🔍 Testing database connections...');
-    
-    const dbConnected = await testDatabaseConnection();
-    if (dbConnected) {
-        console.log(`✅ Using database: ${currentDbConfig.name}`);
-    } else {
-        console.log('❌ No database connection available');
-    }
-});
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+}); 
