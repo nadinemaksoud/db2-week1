@@ -82,3 +82,38 @@ input[type="submit"]:hover, button:hover {
 h1, h2, h3, label {
   text-shadow: 2px 2px 8px #000;
 }
+
+.view-card {
+  background: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+}
+
+.dev-credentials-box {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background: #ffffffd9;
+    padding: 12px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 0 6px rgba(0,0,0,0.2);
+    z-index: 9999;
+}
+
+.dev-credentials-box h3 {
+    margin: 0 0 5px 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.dev-credentials-box ul {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.dev-credentials-box li {
+    margin-bottom: 4px;
+}

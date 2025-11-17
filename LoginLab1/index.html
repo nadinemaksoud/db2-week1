@@ -22,6 +22,18 @@
             <div id="errorMessage" role="alert" style="color:red; margin-top:10px;"></div>
         </form>
     </div>
+    <div class="dev-credentials-box">
+    <h3>Test Users</h3>
+    <ul>
+        <li><strong>C##NADINE</strong> – nadine123</li>
+        <li><strong>C##CHRIS</strong> – chris123</li>
+        <li><strong>C##SAKURA</strong> – Inventory01</li>
+        <li><strong>C##AYA</strong> – Cashier01</li>
+        <li><strong>C##RINA</strong> – HR01</li>
+        <li><strong>C##LEO</strong> – Waiter01</li>
+    </ul>
+</div>
+
 
     <script>
         const loginForm = document.getElementById('loginForm');
@@ -46,6 +58,10 @@
                 if (data.success) {
                     errorMessage.style.color = 'green';
                     errorMessage.textContent = data.message;
+                    sessionStorage.setItem("username", username);
+                    sessionStorage.setItem("password", password);
+                    window.location.href = "dashboard.html";
+
                 } else {
                     errorMessage.style.color = 'red';
                     errorMessage.textContent = data.message;

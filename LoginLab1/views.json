@@ -1,0 +1,82 @@
+{
+  "views": [
+    {
+      "id": "vw_sales_summary",
+      "name": "Sales Summary",
+      "roles": ["C##POS_MANAGER", "C##POS_ASSISTANTMANAGER"],
+      "sql": "SELECT * FROM system.vw_sales_summary"
+    },
+    {
+      "id": "vw_sale_detail",
+      "name": "Sale Detail",
+      "roles": ["C##POS_MANAGER", "C##POS_CASHIER"],
+      "sql": "SELECT * FROM system.vw_sale_detail"
+    },
+    {
+      "id": "vw_current_menu_with_category",
+      "name": "Current Menu with Category",
+      "roles": ["C##POS_CASHIER", "C##POS_WAITER"],
+      "sql": "SELECT * FROM system.vw_current_menu_with_category"
+    },
+    {
+      "id": "vw_employee_performance",
+      "name": "Employee Performance",
+      "roles": ["C##POS_MANAGER", "C##POS_HR"],
+      "sql": "SELECT * FROM system.vw_employee_performance"
+    },
+    {
+      "id": "vw_employee_roles",
+      "name": "Employee Roles",
+      "roles": ["C##POS_MANAGER", "C##POS_HR"],
+      "sql": "SELECT * FROM system.vw_employee_roles"
+    },
+    {
+      "id": "vw_top_selling_products",
+      "name": "Top Selling Products",
+      "roles": ["C##POS_MANAGER", "C##POS_ASSISTANTMANAGER"],
+      "sql": "SELECT * FROM system.vw_top_selling_products"
+    },
+    {
+      "id": "vw_low_stock_alerts",
+      "name": "Low Stock Alerts",
+      "roles": ["C##POS_INVENTORY"],
+      "sql": "SELECT * FROM system.vw_low_stock_alerts"
+    },
+    {
+      "id": "vw_payment_breakdown",
+      "name": "Payment Breakdown",
+      "roles": ["C##POS_MANAGER", "C##POS_ASSISTANTMANAGER"],
+      "sql": "SELECT * FROM system.vw_payment_breakdown"
+    },
+    {
+      "id": "vw_loyalty_summary",
+      "name": "Loyalty Summary",
+      "roles": ["C##POS_MANAGER", "C##POS_ASSISTANTMANAGER"],
+      "sql": "SELECT * FROM system.vw_loyalty_summary"
+    },
+    {
+      "id": "vw_daily_revenue",
+      "name": "Daily Revenue",
+      "roles": ["C##POS_MANAGER", "C##POS_ASSISTANTMANAGER"],
+      "sql": "SELECT * FROM system.vw_daily_revenue"
+    },
+    {
+      "id": "vw_category_performance",
+      "name": "Category Performance",
+      "roles": ["C##POS_MANAGER", "C##POS_ASSISTANTMANAGER"],
+      "sql": "SELECT * FROM system.vw_category_performance"
+    },
+    {
+      "id": "vw_monthly_growth",
+      "name": "Monthly Growth",
+      "roles": ["C##POS_MANAGER"],
+      "sql": "SELECT * FROM system.vw_monthly_growth"
+    },
+    {
+      "id": "vw_customer_activity",
+      "name": "Customer Activity",
+      "roles": ["C##POS_MANAGER"],
+      "sql": "SELECT * FROM system.vw_customer_activity"
+    }
+  ]
+}
